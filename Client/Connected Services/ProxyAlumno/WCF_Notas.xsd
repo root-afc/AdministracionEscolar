@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WCF_Notas" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCF_Notas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="AlumnoBE">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Correo_alumno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Dirección_alumno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Documento_alumno" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado_alumno" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Fecha_nacimiento_alumno" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Genero_alumno" type="ser:char" />
+      <xs:element minOccurs="0" name="Id_alumno" type="xs:int" />
+      <xs:element minOccurs="0" name="Materno_alumno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre_alumno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Paterno_alumno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono_alumno" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AlumnoBE" nillable="true" type="tns:AlumnoBE" />
+  <xs:complexType name="ArrayOfAlumnoBE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlumnoBE" nillable="true" type="tns:AlumnoBE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlumnoBE" nillable="true" type="tns:ArrayOfAlumnoBE" />
+</xs:schema>

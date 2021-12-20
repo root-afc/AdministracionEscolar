@@ -1,0 +1,929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SecundariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ALUMNO">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+          </Key>
+          <Property Name="id_alumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_alumno" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ape_paterno" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ape_materno" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="doc_alumno" Type="int" Nullable="false" />
+          <Property Name="fech_nac_alumno" Type="date" />
+          <Property Name="telf_alumno" Type="int" />
+          <Property Name="dir_alumno" Type="varchar" MaxLength="100" />
+          <Property Name="correo_alumno" Type="varchar" MaxLength="60" />
+          <Property Name="genero" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="estado_alumno" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AÑO_LECTIVO">
+          <Key>
+            <PropertyRef Name="id_año" />
+          </Key>
+          <Property Name="id_año" Type="int" Nullable="false" />
+          <Property Name="inicio_año" Type="date" Nullable="false" />
+          <Property Name="fin_año" Type="date" Nullable="false" />
+          <Property Name="estado_año" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CURSO">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_curso" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado_curso" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_ALUMNO">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+            <PropertyRef Name="id_año" />
+          </Key>
+          <Property Name="id_alumno" Type="int" Nullable="false" />
+          <Property Name="id_año" Type="int" Nullable="false" />
+          <Property Name="comportamiento" Type="varchar" MaxLength="500" />
+          <Property Name="aprobo_grado" Type="bit" />
+          <Property Name="id_grado" Type="int" />
+          <Property Name="id_seccion" Type="int" />
+        </EntityType>
+        <EntityType Name="GRADO">
+          <Key>
+            <PropertyRef Name="id_grado" />
+          </Key>
+          <Property Name="id_grado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_grado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GRADO_CURSO">
+          <Key>
+            <PropertyRef Name="id_grado" />
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_grado" Type="int" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+          <Property Name="horas_dictadas" Type="int" />
+          <Property Name="estado_gra_cur" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOGRO">
+          <Key>
+            <PropertyRef Name="id_logro" />
+          </Key>
+          <Property Name="id_logro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_logo" Type="date" Nullable="false" />
+          <Property Name="competicion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="id_alumno" Type="int" />
+          <Property Name="id_año" Type="int" />
+        </EntityType>
+        <EntityType Name="NOTA_CURSO">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+            <PropertyRef Name="id_año" />
+            <PropertyRef Name="id_grado" />
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_alumno" Type="int" Nullable="false" />
+          <Property Name="id_año" Type="int" Nullable="false" />
+          <Property Name="id_grado" Type="int" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+          <Property Name="trimestre_uno" Type="int" />
+          <Property Name="trimestre_dos" Type="int" />
+          <Property Name="trimestre_tres" Type="int" />
+          <Property Name="promedio" Type="int" />
+          <Property Name="aprobo_curso" Type="bit" />
+        </EntityType>
+        <EntityType Name="SECCION">
+          <Key>
+            <PropertyRef Name="id_seccion" />
+          </Key>
+          <Property Name="id_seccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_seccion" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TARDANZA">
+          <Key>
+            <PropertyRef Name="fecha_tardanza" />
+            <PropertyRef Name="id_alumno" />
+            <PropertyRef Name="id_año" />
+          </Key>
+          <Property Name="fecha_tardanza" Type="date" Nullable="false" />
+          <Property Name="id_alumno" Type="int" Nullable="false" />
+          <Property Name="id_año" Type="int" Nullable="false" />
+          <Property Name="minutos_tardanza" Type="int" Nullable="false" />
+          <Property Name="justificacion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_Detalle_Alumno_I">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="1" />
+          <End Role="DETALLE_ALUMNO" Type="Self.DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Alumno_II">
+          <End Role="AÑO_LECTIVO" Type="Self.AÑO_LECTIVO" Multiplicity="1" />
+          <End Role="DETALLE_ALUMNO" Type="Self.DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Grado">
+          <End Role="GRADO" Type="Self.GRADO" Multiplicity="0..1" />
+          <End Role="DETALLE_ALUMNO" Type="Self.DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADO">
+              <PropertyRef Name="id_grado" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Seccion">
+          <End Role="SECCION" Type="Self.SECCION" Multiplicity="0..1" />
+          <End Role="DETALLE_ALUMNO" Type="Self.DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECCION">
+              <PropertyRef Name="id_seccion" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Curso_I">
+          <End Role="GRADO" Type="Self.GRADO" Multiplicity="1" />
+          <End Role="GRADO_CURSO" Type="Self.GRADO_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADO">
+              <PropertyRef Name="id_grado" />
+            </Principal>
+            <Dependent Role="GRADO_CURSO">
+              <PropertyRef Name="id_grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Curso_II">
+          <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+          <End Role="GRADO_CURSO" Type="Self.GRADO_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="GRADO_CURSO">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logro_Alumno">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="0..1" />
+          <End Role="LOGRO" Type="Self.LOGRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="LOGRO">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logro_Año">
+          <End Role="AÑO_LECTIVO" Type="Self.AÑO_LECTIVO" Multiplicity="0..1" />
+          <End Role="LOGRO" Type="Self.LOGRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="LOGRO">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_I">
+          <End Role="AÑO_LECTIVO" Type="Self.AÑO_LECTIVO" Multiplicity="1" />
+          <End Role="NOTA_CURSO" Type="Self.NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_II">
+          <End Role="GRADO" Type="Self.GRADO" Multiplicity="1" />
+          <End Role="NOTA_CURSO" Type="Self.NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADO">
+              <PropertyRef Name="id_grado" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_III">
+          <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+          <End Role="NOTA_CURSO" Type="Self.NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_IV">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="1" />
+          <End Role="NOTA_CURSO" Type="Self.NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tardanza_Alumno">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="1" />
+          <End Role="TARDANZA" Type="Self.TARDANZA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="TARDANZA">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tardanza_Año">
+          <End Role="AÑO_LECTIVO" Type="Self.AÑO_LECTIVO" Multiplicity="1" />
+          <End Role="TARDANZA" Type="Self.TARDANZA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="TARDANZA">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="USP_CantidadAlumnosPorAño" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GeneroAlumnoActivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Usp_TopAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="varaño" Type="int" Mode="In" />
+          <Parameter Name="vargrado" Type="int" Mode="In" />
+          <Parameter Name="varcurso" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SecundariaModelStoreContainer">
+          <EntitySet Name="ALUMNO" EntityType="Self.ALUMNO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AÑO_LECTIVO" EntityType="Self.AÑO_LECTIVO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_ALUMNO" EntityType="Self.DETALLE_ALUMNO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRADO" EntityType="Self.GRADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRADO_CURSO" EntityType="Self.GRADO_CURSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOGRO" EntityType="Self.LOGRO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NOTA_CURSO" EntityType="Self.NOTA_CURSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SECCION" EntityType="Self.SECCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TARDANZA" EntityType="Self.TARDANZA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Detalle_Alumno_I" Association="Self.FK_Detalle_Alumno_I">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Alumno_II" Association="Self.FK_Detalle_Alumno_II">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Grado" Association="Self.FK_Detalle_Grado">
+            <End Role="GRADO" EntitySet="GRADO" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Seccion" Association="Self.FK_Detalle_Seccion">
+            <End Role="SECCION" EntitySet="SECCION" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Curso_I" Association="Self.FK_Grado_Curso_I">
+            <End Role="GRADO" EntitySet="GRADO" />
+            <End Role="GRADO_CURSO" EntitySet="GRADO_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Curso_II" Association="Self.FK_Grado_Curso_II">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="GRADO_CURSO" EntitySet="GRADO_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logro_Alumno" Association="Self.FK_Logro_Alumno">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="LOGRO" EntitySet="LOGRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logro_Año" Association="Self.FK_Logro_Año">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="LOGRO" EntitySet="LOGRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_I" Association="Self.FK_Nota_Curso_I">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_II" Association="Self.FK_Nota_Curso_II">
+            <End Role="GRADO" EntitySet="GRADO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_III" Association="Self.FK_Nota_Curso_III">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_IV" Association="Self.FK_Nota_Curso_IV">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tardanza_Alumno" Association="Self.FK_Tardanza_Alumno">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="TARDANZA" EntitySet="TARDANZA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tardanza_Año" Association="Self.FK_Tardanza_Año">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="TARDANZA" EntitySet="TARDANZA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SecundariaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SecundariaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DETALLE_ALUMNO" EntityType="SecundariaModel.DETALLE_ALUMNO" />
+          <EntitySet Name="AÑO_LECTIVO" EntityType="SecundariaModel.AÑO_LECTIVO" />
+          <EntitySet Name="CURSO" EntityType="SecundariaModel.CURSO" />
+          <EntitySet Name="GRADO" EntityType="SecundariaModel.GRADO" />
+          <EntitySet Name="GRADO_CURSO" EntityType="SecundariaModel.GRADO_CURSO" />
+          <EntitySet Name="LOGRO" EntityType="SecundariaModel.LOGRO" />
+          <EntitySet Name="NOTA_CURSO" EntityType="SecundariaModel.NOTA_CURSO" />
+          <EntitySet Name="SECCION" EntityType="SecundariaModel.SECCION" />
+          <EntitySet Name="TARDANZA" EntityType="SecundariaModel.TARDANZA" />
+          <AssociationSet Name="FK_Detalle_Alumno_II" Association="SecundariaModel.FK_Detalle_Alumno_II">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logro_Año" Association="SecundariaModel.FK_Logro_Año">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="LOGRO" EntitySet="LOGRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_I" Association="SecundariaModel.FK_Nota_Curso_I">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tardanza_Año" Association="SecundariaModel.FK_Tardanza_Año">
+            <End Role="AÑO_LECTIVO" EntitySet="AÑO_LECTIVO" />
+            <End Role="TARDANZA" EntitySet="TARDANZA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Curso_II" Association="SecundariaModel.FK_Grado_Curso_II">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="GRADO_CURSO" EntitySet="GRADO_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_III" Association="SecundariaModel.FK_Nota_Curso_III">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Grado" Association="SecundariaModel.FK_Detalle_Grado">
+            <End Role="GRADO" EntitySet="GRADO" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Seccion" Association="SecundariaModel.FK_Detalle_Seccion">
+            <End Role="SECCION" EntitySet="SECCION" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Curso_I" Association="SecundariaModel.FK_Grado_Curso_I">
+            <End Role="GRADO" EntitySet="GRADO" />
+            <End Role="GRADO_CURSO" EntitySet="GRADO_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_II" Association="SecundariaModel.FK_Nota_Curso_II">
+            <End Role="GRADO" EntitySet="GRADO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <FunctionImport Name="Usp_TopAlumno" ReturnType="Collection(SecundariaModel.Usp_TopAlumno_Result)">
+            <Parameter Name="varaño" Mode="In" Type="Int32" />
+            <Parameter Name="vargrado" Mode="In" Type="Int32" />
+            <Parameter Name="varcurso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ALUMNO" EntityType="SecundariaModel.ALUMNO" />
+          <AssociationSet Name="FK_Detalle_Alumno_I" Association="SecundariaModel.FK_Detalle_Alumno_I">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="DETALLE_ALUMNO" EntitySet="DETALLE_ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logro_Alumno" Association="SecundariaModel.FK_Logro_Alumno">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="LOGRO" EntitySet="LOGRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Curso_IV" Association="SecundariaModel.FK_Nota_Curso_IV">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="NOTA_CURSO" EntitySet="NOTA_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tardanza_Alumno" Association="SecundariaModel.FK_Tardanza_Alumno">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="TARDANZA" EntitySet="TARDANZA" />
+          </AssociationSet>
+          <FunctionImport Name="USP_CantidadAlumnosPorAño" ReturnType="Collection(SecundariaModel.USP_CantidadAlumnosPorAño_Result)" />
+          <FunctionImport Name="usp_GeneroAlumnoActivo" ReturnType="Collection(SecundariaModel.usp_GeneroAlumnoActivo_Result)" />
+        </EntityContainer>
+        <EntityType Name="DETALLE_ALUMNO">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+            <PropertyRef Name="id_año" />
+          </Key>
+          <Property Name="id_alumno" Type="Int32" Nullable="false" />
+          <Property Name="id_año" Type="Int32" Nullable="false" />
+          <Property Name="comportamiento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="aprobo_grado" Type="Boolean" />
+          <Property Name="id_grado" Type="Int32" />
+          <Property Name="id_seccion" Type="Int32" />
+          <NavigationProperty Name="AÑO_LECTIVO" Relationship="SecundariaModel.FK_Detalle_Alumno_II" FromRole="DETALLE_ALUMNO" ToRole="AÑO_LECTIVO" />
+          <NavigationProperty Name="GRADO" Relationship="SecundariaModel.FK_Detalle_Grado" FromRole="DETALLE_ALUMNO" ToRole="GRADO" />
+          <NavigationProperty Name="SECCION" Relationship="SecundariaModel.FK_Detalle_Seccion" FromRole="DETALLE_ALUMNO" ToRole="SECCION" />
+          <NavigationProperty Name="ALUMNO" Relationship="SecundariaModel.FK_Detalle_Alumno_I" FromRole="DETALLE_ALUMNO" ToRole="ALUMNO" />
+        </EntityType>
+        <EntityType Name="AÑO_LECTIVO">
+          <Key>
+            <PropertyRef Name="id_año" />
+          </Key>
+          <Property Name="id_año" Type="Int32" Nullable="false" />
+          <Property Name="inicio_año" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fin_año" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estado_año" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DETALLE_ALUMNO" Relationship="SecundariaModel.FK_Detalle_Alumno_II" FromRole="AÑO_LECTIVO" ToRole="DETALLE_ALUMNO" />
+          <NavigationProperty Name="LOGRO" Relationship="SecundariaModel.FK_Logro_Año" FromRole="AÑO_LECTIVO" ToRole="LOGRO" />
+          <NavigationProperty Name="NOTA_CURSO" Relationship="SecundariaModel.FK_Nota_Curso_I" FromRole="AÑO_LECTIVO" ToRole="NOTA_CURSO" />
+          <NavigationProperty Name="TARDANZA" Relationship="SecundariaModel.FK_Tardanza_Año" FromRole="AÑO_LECTIVO" ToRole="TARDANZA" />
+        </EntityType>
+        <EntityType Name="CURSO">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_curso" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado_curso" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GRADO_CURSO" Relationship="SecundariaModel.FK_Grado_Curso_II" FromRole="CURSO" ToRole="GRADO_CURSO" />
+          <NavigationProperty Name="NOTA_CURSO" Relationship="SecundariaModel.FK_Nota_Curso_III" FromRole="CURSO" ToRole="NOTA_CURSO" />
+        </EntityType>
+        <EntityType Name="GRADO">
+          <Key>
+            <PropertyRef Name="id_grado" />
+          </Key>
+          <Property Name="id_grado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_grado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_ALUMNO" Relationship="SecundariaModel.FK_Detalle_Grado" FromRole="GRADO" ToRole="DETALLE_ALUMNO" />
+          <NavigationProperty Name="GRADO_CURSO" Relationship="SecundariaModel.FK_Grado_Curso_I" FromRole="GRADO" ToRole="GRADO_CURSO" />
+          <NavigationProperty Name="NOTA_CURSO" Relationship="SecundariaModel.FK_Nota_Curso_II" FromRole="GRADO" ToRole="NOTA_CURSO" />
+        </EntityType>
+        <EntityType Name="GRADO_CURSO">
+          <Key>
+            <PropertyRef Name="id_grado" />
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_grado" Type="Int32" Nullable="false" />
+          <Property Name="id_curso" Type="Int32" Nullable="false" />
+          <Property Name="horas_dictadas" Type="Int32" />
+          <Property Name="estado_gra_cur" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CURSO" Relationship="SecundariaModel.FK_Grado_Curso_II" FromRole="GRADO_CURSO" ToRole="CURSO" />
+          <NavigationProperty Name="GRADO" Relationship="SecundariaModel.FK_Grado_Curso_I" FromRole="GRADO_CURSO" ToRole="GRADO" />
+        </EntityType>
+        <EntityType Name="LOGRO">
+          <Key>
+            <PropertyRef Name="id_logro" />
+          </Key>
+          <Property Name="id_logro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_logo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="competicion" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="id_alumno" Type="Int32" />
+          <Property Name="id_año" Type="Int32" />
+          <NavigationProperty Name="AÑO_LECTIVO" Relationship="SecundariaModel.FK_Logro_Año" FromRole="LOGRO" ToRole="AÑO_LECTIVO" />
+          <NavigationProperty Name="ALUMNO" Relationship="SecundariaModel.FK_Logro_Alumno" FromRole="LOGRO" ToRole="ALUMNO" />
+        </EntityType>
+        <EntityType Name="NOTA_CURSO">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+            <PropertyRef Name="id_año" />
+            <PropertyRef Name="id_grado" />
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_alumno" Type="Int32" Nullable="false" />
+          <Property Name="id_año" Type="Int32" Nullable="false" />
+          <Property Name="id_grado" Type="Int32" Nullable="false" />
+          <Property Name="id_curso" Type="Int32" Nullable="false" />
+          <Property Name="trimestre_uno" Type="Int32" />
+          <Property Name="trimestre_dos" Type="Int32" />
+          <Property Name="trimestre_tres" Type="Int32" />
+          <Property Name="promedio" Type="Int32" />
+          <Property Name="aprobo_curso" Type="Boolean" />
+          <NavigationProperty Name="AÑO_LECTIVO" Relationship="SecundariaModel.FK_Nota_Curso_I" FromRole="NOTA_CURSO" ToRole="AÑO_LECTIVO" />
+          <NavigationProperty Name="CURSO" Relationship="SecundariaModel.FK_Nota_Curso_III" FromRole="NOTA_CURSO" ToRole="CURSO" />
+          <NavigationProperty Name="GRADO" Relationship="SecundariaModel.FK_Nota_Curso_II" FromRole="NOTA_CURSO" ToRole="GRADO" />
+          <NavigationProperty Name="ALUMNO" Relationship="SecundariaModel.FK_Nota_Curso_IV" FromRole="NOTA_CURSO" ToRole="ALUMNO" />
+        </EntityType>
+        <EntityType Name="SECCION">
+          <Key>
+            <PropertyRef Name="id_seccion" />
+          </Key>
+          <Property Name="id_seccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_seccion" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="DETALLE_ALUMNO" Relationship="SecundariaModel.FK_Detalle_Seccion" FromRole="SECCION" ToRole="DETALLE_ALUMNO" />
+        </EntityType>
+        <EntityType Name="TARDANZA">
+          <Key>
+            <PropertyRef Name="fecha_tardanza" />
+            <PropertyRef Name="id_alumno" />
+            <PropertyRef Name="id_año" />
+          </Key>
+          <Property Name="fecha_tardanza" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_alumno" Type="Int32" Nullable="false" />
+          <Property Name="id_año" Type="Int32" Nullable="false" />
+          <Property Name="minutos_tardanza" Type="Int32" Nullable="false" />
+          <Property Name="justificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AÑO_LECTIVO" Relationship="SecundariaModel.FK_Tardanza_Año" FromRole="TARDANZA" ToRole="AÑO_LECTIVO" />
+          <NavigationProperty Name="ALUMNO" Relationship="SecundariaModel.FK_Tardanza_Alumno" FromRole="TARDANZA" ToRole="ALUMNO" />
+        </EntityType>
+        <Association Name="FK_Detalle_Alumno_II">
+          <End Type="SecundariaModel.AÑO_LECTIVO" Role="AÑO_LECTIVO" Multiplicity="1" />
+          <End Type="SecundariaModel.DETALLE_ALUMNO" Role="DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logro_Año">
+          <End Type="SecundariaModel.AÑO_LECTIVO" Role="AÑO_LECTIVO" Multiplicity="0..1" />
+          <End Type="SecundariaModel.LOGRO" Role="LOGRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="LOGRO">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_I">
+          <End Type="SecundariaModel.AÑO_LECTIVO" Role="AÑO_LECTIVO" Multiplicity="1" />
+          <End Type="SecundariaModel.NOTA_CURSO" Role="NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tardanza_Año">
+          <End Type="SecundariaModel.AÑO_LECTIVO" Role="AÑO_LECTIVO" Multiplicity="1" />
+          <End Type="SecundariaModel.TARDANZA" Role="TARDANZA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AÑO_LECTIVO">
+              <PropertyRef Name="id_año" />
+            </Principal>
+            <Dependent Role="TARDANZA">
+              <PropertyRef Name="id_año" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Curso_II">
+          <End Type="SecundariaModel.CURSO" Role="CURSO" Multiplicity="1" />
+          <End Type="SecundariaModel.GRADO_CURSO" Role="GRADO_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="GRADO_CURSO">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_III">
+          <End Type="SecundariaModel.CURSO" Role="CURSO" Multiplicity="1" />
+          <End Type="SecundariaModel.NOTA_CURSO" Role="NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Grado">
+          <End Type="SecundariaModel.GRADO" Role="GRADO" Multiplicity="0..1" />
+          <End Type="SecundariaModel.DETALLE_ALUMNO" Role="DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADO">
+              <PropertyRef Name="id_grado" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Seccion">
+          <End Type="SecundariaModel.SECCION" Role="SECCION" Multiplicity="0..1" />
+          <End Type="SecundariaModel.DETALLE_ALUMNO" Role="DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECCION">
+              <PropertyRef Name="id_seccion" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Curso_I">
+          <End Type="SecundariaModel.GRADO" Role="GRADO" Multiplicity="1" />
+          <End Type="SecundariaModel.GRADO_CURSO" Role="GRADO_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADO">
+              <PropertyRef Name="id_grado" />
+            </Principal>
+            <Dependent Role="GRADO_CURSO">
+              <PropertyRef Name="id_grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_II">
+          <End Type="SecundariaModel.GRADO" Role="GRADO" Multiplicity="1" />
+          <End Type="SecundariaModel.NOTA_CURSO" Role="NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADO">
+              <PropertyRef Name="id_grado" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Usp_TopAlumno_Result">
+          <Property Type="Int32" Name="promedio" Nullable="true" />
+          <Property Type="String" Name="nom_curso" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Full_Name" Nullable="false" MaxLength="122" />
+          <Property Type="Int32" Name="doc_alumno" Nullable="false" />
+          <Property Type="Int32" Name="telf_alumno" Nullable="true" />
+          <Property Type="String" Name="correo_alumno" Nullable="true" MaxLength="60" />
+        </ComplexType>
+        <EntityType Name="ALUMNO">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+          </Key>
+          <Property Name="id_alumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_alumno" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ape_paterno" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ape_materno" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="doc_alumno" Type="Int32" Nullable="false" />
+          <Property Name="fech_nac_alumno" Type="DateTime" Precision="0" />
+          <Property Name="telf_alumno" Type="Int32" />
+          <Property Name="dir_alumno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="correo_alumno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="genero" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="estado_alumno" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DETALLE_ALUMNO" Relationship="SecundariaModel.FK_Detalle_Alumno_I" FromRole="ALUMNO" ToRole="DETALLE_ALUMNO" />
+          <NavigationProperty Name="LOGRO" Relationship="SecundariaModel.FK_Logro_Alumno" FromRole="ALUMNO" ToRole="LOGRO" />
+          <NavigationProperty Name="NOTA_CURSO" Relationship="SecundariaModel.FK_Nota_Curso_IV" FromRole="ALUMNO" ToRole="NOTA_CURSO" />
+          <NavigationProperty Name="TARDANZA" Relationship="SecundariaModel.FK_Tardanza_Alumno" FromRole="ALUMNO" ToRole="TARDANZA" />
+        </EntityType>
+        <Association Name="FK_Detalle_Alumno_I">
+          <End Type="SecundariaModel.ALUMNO" Role="ALUMNO" Multiplicity="1" />
+          <End Type="SecundariaModel.DETALLE_ALUMNO" Role="DETALLE_ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="DETALLE_ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logro_Alumno">
+          <End Type="SecundariaModel.ALUMNO" Role="ALUMNO" Multiplicity="0..1" />
+          <End Type="SecundariaModel.LOGRO" Role="LOGRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="LOGRO">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Curso_IV">
+          <End Type="SecundariaModel.ALUMNO" Role="ALUMNO" Multiplicity="1" />
+          <End Type="SecundariaModel.NOTA_CURSO" Role="NOTA_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="NOTA_CURSO">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tardanza_Alumno">
+          <End Type="SecundariaModel.ALUMNO" Role="ALUMNO" Multiplicity="1" />
+          <End Type="SecundariaModel.TARDANZA" Role="TARDANZA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="TARDANZA">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="USP_CantidadAlumnosPorAño_Result">
+          <Property Type="Int32" Name="Año" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GeneroAlumnoActivo_Result">
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Activo" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SecundariaModelStoreContainer" CdmEntityContainer="SecundariaEntities">
+          <EntitySetMapping Name="DETALLE_ALUMNO">
+            <EntityTypeMapping TypeName="SecundariaModel.DETALLE_ALUMNO">
+              <MappingFragment StoreEntitySet="DETALLE_ALUMNO">
+                <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+                <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+                <ScalarProperty Name="aprobo_grado" ColumnName="aprobo_grado" />
+                <ScalarProperty Name="comportamiento" ColumnName="comportamiento" />
+                <ScalarProperty Name="id_año" ColumnName="id_año" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AÑO_LECTIVO">
+            <EntityTypeMapping TypeName="SecundariaModel.AÑO_LECTIVO">
+              <MappingFragment StoreEntitySet="AÑO_LECTIVO">
+                <ScalarProperty Name="estado_año" ColumnName="estado_año" />
+                <ScalarProperty Name="fin_año" ColumnName="fin_año" />
+                <ScalarProperty Name="inicio_año" ColumnName="inicio_año" />
+                <ScalarProperty Name="id_año" ColumnName="id_año" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CURSO">
+            <EntityTypeMapping TypeName="SecundariaModel.CURSO">
+              <MappingFragment StoreEntitySet="CURSO">
+                <ScalarProperty Name="estado_curso" ColumnName="estado_curso" />
+                <ScalarProperty Name="nom_curso" ColumnName="nom_curso" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRADO">
+            <EntityTypeMapping TypeName="SecundariaModel.GRADO">
+              <MappingFragment StoreEntitySet="GRADO">
+                <ScalarProperty Name="nombre_grado" ColumnName="nombre_grado" />
+                <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRADO_CURSO">
+            <EntityTypeMapping TypeName="SecundariaModel.GRADO_CURSO">
+              <MappingFragment StoreEntitySet="GRADO_CURSO">
+                <ScalarProperty Name="estado_gra_cur" ColumnName="estado_gra_cur" />
+                <ScalarProperty Name="horas_dictadas" ColumnName="horas_dictadas" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOGRO">
+            <EntityTypeMapping TypeName="SecundariaModel.LOGRO">
+              <MappingFragment StoreEntitySet="LOGRO">
+                <ScalarProperty Name="id_año" ColumnName="id_año" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="competicion" ColumnName="competicion" />
+                <ScalarProperty Name="fecha_logo" ColumnName="fecha_logo" />
+                <ScalarProperty Name="id_logro" ColumnName="id_logro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTA_CURSO">
+            <EntityTypeMapping TypeName="SecundariaModel.NOTA_CURSO">
+              <MappingFragment StoreEntitySet="NOTA_CURSO">
+                <ScalarProperty Name="aprobo_curso" ColumnName="aprobo_curso" />
+                <ScalarProperty Name="promedio" ColumnName="promedio" />
+                <ScalarProperty Name="trimestre_tres" ColumnName="trimestre_tres" />
+                <ScalarProperty Name="trimestre_dos" ColumnName="trimestre_dos" />
+                <ScalarProperty Name="trimestre_uno" ColumnName="trimestre_uno" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+                <ScalarProperty Name="id_año" ColumnName="id_año" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SECCION">
+            <EntityTypeMapping TypeName="SecundariaModel.SECCION">
+              <MappingFragment StoreEntitySet="SECCION">
+                <ScalarProperty Name="cod_seccion" ColumnName="cod_seccion" />
+                <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TARDANZA">
+            <EntityTypeMapping TypeName="SecundariaModel.TARDANZA">
+              <MappingFragment StoreEntitySet="TARDANZA">
+                <ScalarProperty Name="justificacion" ColumnName="justificacion" />
+                <ScalarProperty Name="minutos_tardanza" ColumnName="minutos_tardanza" />
+                <ScalarProperty Name="id_año" ColumnName="id_año" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+                <ScalarProperty Name="fecha_tardanza" ColumnName="fecha_tardanza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Usp_TopAlumno" FunctionName="SecundariaModel.Store.Usp_TopAlumno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SecundariaModel.Usp_TopAlumno_Result">
+                <ScalarProperty Name="promedio" ColumnName="promedio" />
+                <ScalarProperty Name="nom_curso" ColumnName="nom_curso" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="doc_alumno" ColumnName="doc_alumno" />
+                <ScalarProperty Name="telf_alumno" ColumnName="telf_alumno" />
+                <ScalarProperty Name="correo_alumno" ColumnName="correo_alumno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ALUMNO">
+            <EntityTypeMapping TypeName="SecundariaModel.ALUMNO">
+              <MappingFragment StoreEntitySet="ALUMNO">
+                <ScalarProperty Name="estado_alumno" ColumnName="estado_alumno" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="correo_alumno" ColumnName="correo_alumno" />
+                <ScalarProperty Name="dir_alumno" ColumnName="dir_alumno" />
+                <ScalarProperty Name="telf_alumno" ColumnName="telf_alumno" />
+                <ScalarProperty Name="fech_nac_alumno" ColumnName="fech_nac_alumno" />
+                <ScalarProperty Name="doc_alumno" ColumnName="doc_alumno" />
+                <ScalarProperty Name="ape_materno" ColumnName="ape_materno" />
+                <ScalarProperty Name="ape_paterno" ColumnName="ape_paterno" />
+                <ScalarProperty Name="nom_alumno" ColumnName="nom_alumno" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_CantidadAlumnosPorAño" FunctionName="SecundariaModel.Store.USP_CantidadAlumnosPorAño">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SecundariaModel.USP_CantidadAlumnosPorAño_Result">
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GeneroAlumnoActivo" FunctionName="SecundariaModel.Store.usp_GeneroAlumnoActivo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SecundariaModel.usp_GeneroAlumnoActivo_Result">
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServicioAnoLectivo" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WCF_Notas" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioAnoLectivo_InsertAñoLectivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAñoLectivo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_InsertAñoLectivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAñoLectivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_UpdateAñoLectivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAñoLectivo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_UpdateAñoLectivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAñoLectivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_DeleteAñoLectivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAñoLectivo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_DeleteAñoLectivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAñoLectivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_GetAñoLectivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAñoLectivo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_GetAñoLectivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAñoLectivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_GetAllAñoLectivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAñoLectivo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAnoLectivo_GetAllAñoLectivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAñoLectivoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioAnoLectivo">
+    <wsdl:operation name="InsertAñoLectivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAnoLectivo/InsertAñoLectivo" message="tns:IServicioAnoLectivo_InsertAñoLectivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAnoLectivo/InsertAñoLectivoResponse" message="tns:IServicioAnoLectivo_InsertAñoLectivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAñoLectivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAnoLectivo/UpdateAñoLectivo" message="tns:IServicioAnoLectivo_UpdateAñoLectivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAnoLectivo/UpdateAñoLectivoResponse" message="tns:IServicioAnoLectivo_UpdateAñoLectivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAñoLectivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAnoLectivo/DeleteAñoLectivo" message="tns:IServicioAnoLectivo_DeleteAñoLectivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAnoLectivo/DeleteAñoLectivoResponse" message="tns:IServicioAnoLectivo_DeleteAñoLectivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAñoLectivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAnoLectivo/GetAñoLectivo" message="tns:IServicioAnoLectivo_GetAñoLectivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAnoLectivo/GetAñoLectivoResponse" message="tns:IServicioAnoLectivo_GetAñoLectivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAñoLectivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAnoLectivo/GetAllAñoLectivo" message="tns:IServicioAnoLectivo_GetAllAñoLectivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAnoLectivo/GetAllAñoLectivoResponse" message="tns:IServicioAnoLectivo_GetAllAñoLectivo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioAnoLectivo" type="tns:IServicioAnoLectivo">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertAñoLectivo">
+      <soap:operation soapAction="http://tempuri.org/IServicioAnoLectivo/InsertAñoLectivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAñoLectivo">
+      <soap:operation soapAction="http://tempuri.org/IServicioAnoLectivo/UpdateAñoLectivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAñoLectivo">
+      <soap:operation soapAction="http://tempuri.org/IServicioAnoLectivo/DeleteAñoLectivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAñoLectivo">
+      <soap:operation soapAction="http://tempuri.org/IServicioAnoLectivo/GetAñoLectivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAñoLectivo">
+      <soap:operation soapAction="http://tempuri.org/IServicioAnoLectivo/GetAllAñoLectivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioAnoLectivo">
+    <wsdl:port name="BasicHttpBinding_IServicioAnoLectivo" binding="tns:BasicHttpBinding_IServicioAnoLectivo">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WCF_Notas/ServicioAnoLectivo/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

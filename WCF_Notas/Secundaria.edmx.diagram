@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5d4fc6fab3a5414ba1fc55550f9d0ebd" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="SecundariaModel.DETALLE_ALUMNO" Width="2.125" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="SecundariaModel.AÑO_LECTIVO" Width="1.5" PointX="0.875" PointY="9.375" />
+        <EntityTypeShape EntityType="SecundariaModel.CURSO" Width="1.5" PointX="0.875" PointY="19" />
+        <EntityTypeShape EntityType="SecundariaModel.GRADO" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SecundariaModel.GRADO_CURSO" Width="1.5" PointX="3.125" PointY="17.25" />
+        <EntityTypeShape EntityType="SecundariaModel.LOGRO" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="SecundariaModel.NOTA_CURSO" Width="1.5" PointX="3.125" PointY="8.25" />
+        <EntityTypeShape EntityType="SecundariaModel.SECCION" Width="1.5" PointX="0.75" PointY="13.375" />
+        <EntityTypeShape EntityType="SecundariaModel.TARDANZA" Width="1.5" PointX="6.125" PointY="4.875" />
+        <AssociationConnector Association="SecundariaModel.FK_Detalle_Alumno_II" />
+        <AssociationConnector Association="SecundariaModel.FK_Logro_Año" />
+        <AssociationConnector Association="SecundariaModel.FK_Nota_Curso_I" />
+        <AssociationConnector Association="SecundariaModel.FK_Tardanza_Año" />
+        <AssociationConnector Association="SecundariaModel.FK_Grado_Curso_II" />
+        <AssociationConnector Association="SecundariaModel.FK_Nota_Curso_III" />
+        <AssociationConnector Association="SecundariaModel.FK_Detalle_Grado" />
+        <AssociationConnector Association="SecundariaModel.FK_Detalle_Seccion" />
+        <AssociationConnector Association="SecundariaModel.FK_Grado_Curso_I" />
+        <AssociationConnector Association="SecundariaModel.FK_Nota_Curso_II" />
+        <EntityTypeShape EntityType="SecundariaModel.ALUMNO" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="SecundariaModel.FK_Detalle_Alumno_I" />
+        <AssociationConnector Association="SecundariaModel.FK_Logro_Alumno" />
+        <AssociationConnector Association="SecundariaModel.FK_Nota_Curso_IV" />
+        <AssociationConnector Association="SecundariaModel.FK_Tardanza_Alumno" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SecundariaModelStoreContainer" CdmEntityContainer="SecundariaEntities">
+    <EntitySetMapping Name="DETALLE_ALUMNO">
+      <EntityTypeMapping TypeName="SecundariaModel.DETALLE_ALUMNO">
+        <MappingFragment StoreEntitySet="DETALLE_ALUMNO">
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+          <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+          <ScalarProperty Name="aprobo_grado" ColumnName="aprobo_grado" />
+          <ScalarProperty Name="comportamiento" ColumnName="comportamiento" />
+          <ScalarProperty Name="id_año" ColumnName="id_año" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AÑO_LECTIVO">
+      <EntityTypeMapping TypeName="SecundariaModel.AÑO_LECTIVO">
+        <MappingFragment StoreEntitySet="AÑO_LECTIVO">
+          <ScalarProperty Name="estado_año" ColumnName="estado_año" />
+          <ScalarProperty Name="fin_año" ColumnName="fin_año" />
+          <ScalarProperty Name="inicio_año" ColumnName="inicio_año" />
+          <ScalarProperty Name="id_año" ColumnName="id_año" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CURSO">
+      <EntityTypeMapping TypeName="SecundariaModel.CURSO">
+        <MappingFragment StoreEntitySet="CURSO">
+          <ScalarProperty Name="estado_curso" ColumnName="estado_curso" />
+          <ScalarProperty Name="nom_curso" ColumnName="nom_curso" />
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GRADO">
+      <EntityTypeMapping TypeName="SecundariaModel.GRADO">
+        <MappingFragment StoreEntitySet="GRADO">
+          <ScalarProperty Name="nombre_grado" ColumnName="nombre_grado" />
+          <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GRADO_CURSO">
+      <EntityTypeMapping TypeName="SecundariaModel.GRADO_CURSO">
+        <MappingFragment StoreEntitySet="GRADO_CURSO">
+          <ScalarProperty Name="estado_gra_cur" ColumnName="estado_gra_cur" />
+          <ScalarProperty Name="horas_dictadas" ColumnName="horas_dictadas" />
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+          <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOGRO">
+      <EntityTypeMapping TypeName="SecundariaModel.LOGRO">
+        <MappingFragment StoreEntitySet="LOGRO">
+          <ScalarProperty Name="id_año" ColumnName="id_año" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="competicion" ColumnName="competicion" />
+          <ScalarProperty Name="fecha_logo" ColumnName="fecha_logo" />
+          <ScalarProperty Name="id_logro" ColumnName="id_logro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOTA_CURSO">
+      <EntityTypeMapping TypeName="SecundariaModel.NOTA_CURSO">
+        <MappingFragment StoreEntitySet="NOTA_CURSO">
+          <ScalarProperty Name="aprobo_curso" ColumnName="aprobo_curso" />
+          <ScalarProperty Name="promedio" ColumnName="promedio" />
+          <ScalarProperty Name="trimestre_tres" ColumnName="trimestre_tres" />
+          <ScalarProperty Name="trimestre_dos" ColumnName="trimestre_dos" />
+          <ScalarProperty Name="trimestre_uno" ColumnName="trimestre_uno" />
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+          <ScalarProperty Name="id_grado" ColumnName="id_grado" />
+          <ScalarProperty Name="id_año" ColumnName="id_año" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SECCION">
+      <EntityTypeMapping TypeName="SecundariaModel.SECCION">
+        <MappingFragment StoreEntitySet="SECCION">
+          <ScalarProperty Name="cod_seccion" ColumnName="cod_seccion" />
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TARDANZA">
+      <EntityTypeMapping TypeName="SecundariaModel.TARDANZA">
+        <MappingFragment StoreEntitySet="TARDANZA">
+          <ScalarProperty Name="justificacion" ColumnName="justificacion" />
+          <ScalarProperty Name="minutos_tardanza" ColumnName="minutos_tardanza" />
+          <ScalarProperty Name="id_año" ColumnName="id_año" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+          <ScalarProperty Name="fecha_tardanza" ColumnName="fecha_tardanza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Usp_TopAlumno" FunctionName="SecundariaModel.Store.Usp_TopAlumno">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SecundariaModel.Usp_TopAlumno_Result">
+          <ScalarProperty Name="promedio" ColumnName="promedio" />
+          <ScalarProperty Name="nom_curso" ColumnName="nom_curso" />
+          <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+          <ScalarProperty Name="doc_alumno" ColumnName="doc_alumno" />
+          <ScalarProperty Name="telf_alumno" ColumnName="telf_alumno" />
+          <ScalarProperty Name="correo_alumno" ColumnName="correo_alumno" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="ALUMNO">
+      <EntityTypeMapping TypeName="SecundariaModel.ALUMNO">
+        <MappingFragment StoreEntitySet="ALUMNO">
+          <ScalarProperty Name="estado_alumno" ColumnName="estado_alumno" />
+          <ScalarProperty Name="genero" ColumnName="genero" />
+          <ScalarProperty Name="correo_alumno" ColumnName="correo_alumno" />
+          <ScalarProperty Name="dir_alumno" ColumnName="dir_alumno" />
+          <ScalarProperty Name="telf_alumno" ColumnName="telf_alumno" />
+          <ScalarProperty Name="fech_nac_alumno" ColumnName="fech_nac_alumno" />
+          <ScalarProperty Name="doc_alumno" ColumnName="doc_alumno" />
+          <ScalarProperty Name="ape_materno" ColumnName="ape_materno" />
+          <ScalarProperty Name="ape_paterno" ColumnName="ape_paterno" />
+          <ScalarProperty Name="nom_alumno" ColumnName="nom_alumno" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="USP_CantidadAlumnosPorAño" FunctionName="SecundariaModel.Store.USP_CantidadAlumnosPorAño">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SecundariaModel.USP_CantidadAlumnosPorAño_Result">
+          <ScalarProperty Name="Año" ColumnName="Año" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GeneroAlumnoActivo" FunctionName="SecundariaModel.Store.usp_GeneroAlumnoActivo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SecundariaModel.usp_GeneroAlumnoActivo_Result">
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

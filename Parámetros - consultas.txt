@@ -1,0 +1,8 @@
+Para la consulta de TopAlumno recomiendo usar de parámetros:
+
+Año Lectivo = 1998
+
+Grado = Tecero
+
+Curso = Matemáticas
+

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCF_Notas" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCF_Notas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfCantidadAlumnoAño">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CantidadAlumnoAño" nillable="true" type="tns:CantidadAlumnoAño" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCantidadAlumnoAño" nillable="true" type="tns:ArrayOfCantidadAlumnoAño" />
+  <xs:complexType name="CantidadAlumnoAño">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Año" type="xs:int" />
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CantidadAlumnoAño" nillable="true" type="tns:CantidadAlumnoAño" />
+</xs:schema>
